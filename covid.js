@@ -1,4 +1,4 @@
-var searchCountry = () =>{
+var dispCountry = () =>{
     let htmlHolder = ""
     fetch('https://coronavirus-19-api.herokuapp.com/countries')
     .then(data=>data.json())

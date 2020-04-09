@@ -11,16 +11,14 @@
   <link rel="stylesheet" href="covid.css">
 </head>
 
-<body>
+<body onload="dispCountry()">
     <nav class="navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand">COVID-19 TRACKER</a>
     <div class="form-inline">
         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-danger" onclick="searchCountry()">Search</button>
+        <button class="btn btn-danger">Search</button>
     </div>
     </nav>  
-
-    <div id="vash"></div>
 
     <div class="container">
         <table class="table">
