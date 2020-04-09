@@ -14,11 +14,13 @@
 <body>
     <nav class="navbar navbar-dark bg-dark justify-content-between">
     <a class="navbar-brand">COVID-19 TRACKER</a>
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-danger my-2 my-sm-0">Search</button>
-    </form>
+    <div class="form-inline">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger" onclick="searchCountry()">Search</button>
+    </div>
     </nav>  
+
+    <div id="vash"></div>
 
     <div class="container">
         <table class="table">
@@ -31,31 +33,11 @@
             <th scope="col">Recovered</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@twitter</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@twitter</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            </tr>
+        <tbody id="tab">
         </tbody>
         </table>
     </div>
+  <script src="covid.js"></script>
 
 </body>
 
