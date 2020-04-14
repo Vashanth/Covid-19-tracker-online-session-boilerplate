@@ -1,37 +1,48 @@
 var dispCountry = () =>{
     let htmlHolder = ""
+    let i
     fetch('https://coronavirus-19-api.herokuapp.com/countries')
-    .then(data=>data.json())
+    .then(function(data) {return data.json()})
     .then(data=>{
-        data.map((val,index)=>{
-            htmlHolder+="<tr><th scope='row'>"+index+"</th>"
-            htmlHolder+="<td>"+val.country+"</td>"
-            htmlHolder+="<td>"+val.deaths+"</td>"
-            htmlHolder+="<td>"+val.recovered+"</td>"
-            htmlHolder+="<td>"+val.active+"</td></tr>"
-            document.getElementById("tab").innerHTML+=htmlHolder
-            htmlHolder=""
-        })
+        for(i=0;i<data.length;i++)
+        {
+            htmlHolder+=`<tr class="table-primary">
+                        <td scope="row">${i}</th>
+                        <td>${data[i].country}</td>
+                        <td>${data[i].deaths}</td>
+                        <td>${data[i].recovered}</td>
+                        <td>${data[i].active}</td>
+                        </tr>`
+        }
+        document.getElementById("FillTable").innerHTML=htmlHolder
     })
 }
 
 var searchCountry = () =>{
     let htmlHolder = ""
-    let searchVal = document.getElementById("searcher").value
-    document.getElementById("tab").innerHTML=""
+    let searchValue = document.getElementById("search").value
+    let i,flag="false"
     fetch('https://coronavirus-19-api.herokuapp.com/countries')
-    .then(data=>data.json())
+    .then(function(data) {return data.json()})
     .then(data=>{
-        data=data.filter(data=>data.country.toLowerCase()==searchVal.toLowerCase()||searchVal=="")
-        console.log(data)
-        data.map((val,index)=>{
-            htmlHolder+="<tr><th scope='row'>"+index+"</th>"
-            htmlHolder+="<td>"+val.country+"</td>"
-            htmlHolder+="<td>"+val.deaths+"</td>"
-            htmlHolder+="<td>"+val.recovered+"</td>"
-            htmlHolder+="<td>"+val.active+"</td></tr>"
-            document.getElementById("tab").innerHTML+=htmlHolder
-            htmlHolder=""
-        })
+        for(i=0;i<data.length;i++)
+        {
+            if(searchValue === data[i].country)
+            {
+                htmlHolder=`<tr class="table-primary">
+                            <td scope="row">${i}</th>
+                            <td>${data[i].country}</td>
+                            <td>${data[i].deaths}</td>
+                            <td>${data[i].recovered}</td>
+                            <td>${data[i].active}</td>
+                            </tr>`
+                flag="true"
+            }
+        }
+
+        if(flag=="true")
+        document.getElementById("FillTable").innerHTML=htmlHolder
+        else
+        alert("Wrong Keyword")
     })
 }
