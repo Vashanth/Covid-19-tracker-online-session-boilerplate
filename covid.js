@@ -1,48 +1,36 @@
-var dispCountry = () =>{
+var parser = (data,type) => {
     let htmlHolder = ""
-    let i
-    fetch('https://coronavirus-19-api.herokuapp.com/countries')
-    .then(function(data) {return data.json()})
-    .then(data=>{
-        for(i=0;i<data.length;i++)
+    for(i=0; i<data.length;i++)
+    {
+        if(type=="display" || data[i].country.includes(type))
         {
-            htmlHolder+=`<tr class="table-primary">
-                        <td scope="row">${i}</th>
-                        <td>${data[i].country}</td>
-                        <td>${data[i].deaths}</td>
-                        <td>${data[i].recovered}</td>
-                        <td>${data[i].active}</td>
-                        </tr>`
+            htmlHolder += `<tr class="table-primary">
+            <td scope="row">${i}</td>
+            <td>${data[i].country}</td>
+            <td>${data[i].deaths}</td>
+            <td>${data[i].recovered}</td>
+            <td>${data[i].active}</td>
+            </tr>`
         }
-        document.getElementById("FillTable").innerHTML=htmlHolder
-    })
+    }
+    return htmlHolder
 }
 
-var searchCountry = () =>{
-    let htmlHolder = ""
-    let searchValue = document.getElementById("search").value
-    let i,flag="false"
-    fetch('https://coronavirus-19-api.herokuapp.com/countries')
-    .then(function(data) {return data.json()})
-    .then(data=>{
-        for(i=0;i<data.length;i++)
-        {
-            if(searchValue === data[i].country)
-            {
-                htmlHolder=`<tr class="table-primary">
-                            <td scope="row">${i}</th>
-                            <td>${data[i].country}</td>
-                            <td>${data[i].deaths}</td>
-                            <td>${data[i].recovered}</td>
-                            <td>${data[i].active}</td>
-                            </tr>`
-                flag="true"
-            }
-        }
+var dispCountry =  async () =>{
+    let apiData = await fetch("https://coronavirus-19-api.herokuapp.com/countries")
+    let data = await  apiData.json()  
+    let htmlElements = parser(data,"display")
+    document.getElementById("FillTable").innerHTML = htmlElements
+}
 
-        if(flag=="true")
-        document.getElementById("FillTable").innerHTML=htmlHolder
-        else
-        alert("Wrong Keyword")
-    })
+var searchCountry = async () =>{
+    let searchValue = document.getElementById("search").value
+    let apiData = await fetch("https://coronavirus-19-api.herokuapp.com/countries")
+    let data = await  apiData.json()  
+    let found = parser(data,searchValue)   
+
+    if(found === "")
+    alert("Invalid Keyword")
+    else
+    document.getElementById("FillTable").innerHTML = found
 }
