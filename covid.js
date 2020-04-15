@@ -24,13 +24,10 @@ var dispCountry =  async () =>{
 }
 
 var searchCountry = async () =>{
+    console.log("ds")
     let searchValue = document.getElementById("search").value
     let apiData = await fetch("https://coronavirus-19-api.herokuapp.com/countries")
     let data = await  apiData.json()  
     let found = parser(data,searchValue)   
-
-    if(found === "")
-    alert("Invalid Keyword")
-    else
     document.getElementById("FillTable").innerHTML = found
 }
