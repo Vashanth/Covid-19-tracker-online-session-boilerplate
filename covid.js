@@ -2,7 +2,7 @@ var parser = (data,type) => {
     let htmlHolder = ""
     for(i=0; i<data.length;i++)
     {
-        if(type=="display" || data[i].country.includes(type))
+        if(type=="display" || data[i].country.toLowerCase().includes(type.toLowerCase()))
         {
             htmlHolder += `<tr class="table-primary">
             <td scope="row">${i}</td>
